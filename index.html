@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servex Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>SERVEX PRO</h1>
+      <p>Smart local service marketplace with real-time matching and dynamic pricing.</p>
+      <a href="#booking" class="primary-btn">Book a Service</a>
+    </div>
+    <div class="hero-visual">
+      <div class="card">
+        <h2>Featured Services</h2>
+        <ul>
+          <li>Plumber</li>
+          <li>Electrician</li>
+          <li>Tutor</li>
+          <li>Mechanic</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="features">
+      <div>
+        <h2>Why Choose Servex Pro?</h2>
+        <p>Find verified professionals, get instant matches, and enjoy transparent pricing.</p>
+      </div>
+      <div class="feature-grid">
+        <article>
+          <h3>Real-Time Matching</h3>
+          <p>We'll suggest the best provider based on rating, distance, and price.</p>
+        </article>
+        <article>
+          <h3>Dynamic Pricing</h3>
+          <p>Pricing adjusts automatically depending on demand and availability.</p>
+        </article>
+        <article>
+          <h3>Secure Booking</h3>
+          <p>One-click booking with live status updates and provider tracking.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="booking" class="booking">
+      <div>
+        <h2>Start Your Booking</h2>
+        <p>Select a service, enter your location, and see an estimated fare.</p>
+      </div>
+      <form id="bookingForm">
+        <label for="service">Service type</label>
+        <select id="service" required>
+          <option value="plumber">Plumber</option>
+          <option value="electrician">Electrician</option>
+          <option value="tutor">Tutor</option>
+          <option value="mechanic">Mechanic</option>
+        </select>
+
+        <label for="location">Location</label>
+        <input id="location" type="text" placeholder="Enter your neighbourhood" required />
+
+        <label for="urgency">Urgency</label>
+        <select id="urgency">
+          <option value="normal">Normal</option>
+          <option value="high">High (surge pricing)</option>
+        </select>
+
+        <button type="submit" class="primary-btn">Get Match</button>
+      </form>
+      <div id="bookingResult" class="result-card hidden"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Servex Pro • Smart local service marketplace • HTML, CSS, JavaScript</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
