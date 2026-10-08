@@ -13,21 +13,21 @@ DB_PATH = ROOT / "backend" / "servicex.db"
 
 
 SERVICES = [
-    ("plumber", "Plumber", 40),
-    ("electrician", "Electrician", 45),
-    ("tutor", "Tutor", 30),
-    ("mechanic", "Mechanic", 50),
+    ("plumber", "Plumber", 400),
+    ("electrician", "Electrician", 450),
+    ("tutor", "Tutor", 300),
+    ("mechanic", "Mechanic", 500),
 ]
 
 PROVIDERS = [
-    ("Aarav Repairs", "plumber", 4.8, 2.1, 42, "available"),
-    ("FixFlow Plumbing", "plumber", 4.5, 4.6, 36, "available"),
-    ("VoltCare", "electrician", 4.9, 3.2, 46, "available"),
-    ("BrightSpark Services", "electrician", 4.4, 6.0, 39, "busy"),
-    ("LearnMate", "tutor", 4.7, 1.8, 32, "available"),
-    ("Concept Coach", "tutor", 4.3, 5.4, 28, "available"),
-    ("AutoAid", "mechanic", 4.8, 3.8, 54, "available"),
-    ("QuickWheels", "mechanic", 4.2, 7.1, 47, "available"),
+    ("Aarav Repairs", "plumber", 4.8, 2.1, 420, "available"),
+    ("FixFlow Plumbing", "plumber", 4.5, 4.6, 360, "available"),
+    ("VoltCare", "electrician", 4.9, 3.2, 460, "available"),
+    ("BrightSpark Services", "electrician", 4.4, 6.0, 390, "busy"),
+    ("LearnMate", "tutor", 4.7, 1.8, 320, "available"),
+    ("Concept Coach", "tutor", 4.3, 5.4, 280, "available"),
+    ("AutoAid", "mechanic", 4.8, 3.8, 540, "available"),
+    ("QuickWheels", "mechanic", 4.2, 7.1, 470, "available"),
 ]
 
 
@@ -97,14 +97,14 @@ def rows_to_dicts(rows: list[sqlite3.Row]) -> list[dict]:
 def provider_score(provider: sqlite3.Row, urgency: str) -> float:
     rating_score = provider["rating"] * 20
     distance_penalty = provider["distance_km"] * (5 if urgency == "high" else 3)
-    price_penalty = provider["hourly_rate"] * 0.7
+    price_penalty = provider["hourly_rate"] * 0.05
     availability_bonus = 12 if provider["status"] == "available" else -20
     return round(rating_score + availability_bonus - distance_penalty - price_penalty, 2)
 
 
 def estimate_price(provider: sqlite3.Row, urgency: str) -> int:
     urgency_factor = 1.35 if urgency == "high" else 1
-    distance_fee = provider["distance_km"] * 4
+    distance_fee = provider["distance_km"] * 40
     return math.ceil((provider["hourly_rate"] + distance_fee) * urgency_factor)
 
 

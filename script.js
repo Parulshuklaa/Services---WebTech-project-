@@ -5,14 +5,18 @@ const apiStatus = document.getElementById('apiStatus');
 const API_BASE = 'http://127.0.0.1:8000';
 
 const pricing = {
-  plumber: 40,
-  electrician: 45,
-  tutor: 30,
-  mechanic: 50,
+  plumber: 400,
+  electrician: 450,
+  tutor: 300,
+  mechanic: 500,
 };
 
+function formatRupees(amount) {
+  return `₹${Number(amount).toLocaleString('en-IN')}`;
+}
+
 function calculateEstimate(service, urgency) {
-  const base = pricing[service] || 40;
+  const base = pricing[service] || 400;
   const demandFactor = urgency === 'high' ? 1.35 : 1;
   const distanceFactor = 1 + Math.random() * 0.25;
   return Math.round(base * distanceFactor * demandFactor);
@@ -24,7 +28,7 @@ function buildMatchMessage(service, location, urgency, estimate) {
     <p><strong>Service:</strong> ${service.charAt(0).toUpperCase() + service.slice(1)}</p>
     <p><strong>Location:</strong> ${location}</p>
     <p><strong>Urgency:</strong> ${urgency === 'high' ? 'High demand' : 'Normal'}</p>
-    <p><strong>Estimated Price:</strong> $${estimate}</p>
+    <p><strong>Estimated Price:</strong> ${formatRupees(estimate)}</p>
     <p>Provider score is computed from rating, distance, and price to deliver the best local match.</p>
   `;
 }
@@ -51,7 +55,7 @@ function buildBackendMatchMessage(result, service, location, urgency) {
     <p><strong>Location:</strong> ${location}</p>
     <p><strong>Urgency:</strong> ${urgency === 'high' ? 'High demand' : 'Normal'}</p>
     <p><strong>Provider:</strong> ${match.name} (${match.rating}/5 rating, ${match.distance_km} km away)</p>
-    <p><strong>Estimated Price:</strong> $${match.estimated_price}</p>
+    <p><strong>Estimated Price:</strong> ${formatRupees(match.estimated_price)}</p>
     <p><strong>Match Score:</strong> ${match.match_score}</p>
   `;
 }
@@ -63,14 +67,14 @@ async function loadBookings() {
       ? bookings.slice(0, 5).map(booking => `
           <li>
             <strong>#${booking.id}</strong> ${booking.service_name} with ${booking.provider_name}
-            <span>${booking.status} • $${booking.estimated_price}</span>
+            <span>${booking.status} • ${formatRupees(booking.estimated_price)}</span>
           </li>
         `).join('')
       : '<li>No bookings yet. Create the first one.</li>';
     apiStatus.textContent = 'Connected to Python + SQLite backend.';
   } catch (error) {
-    apiStatus.textContent = 'Backend offline. Demo mode is using frontend-only matching.';
-    bookingList.innerHTML = '<li>Start backend/app.py to persist bookings.</li>';
+    apiStatus.textContent = 'GitHub Pages can show the frontend only. Run or host backend/app.py to enable the real API and SQLite bookings.';
+    bookingList.innerHTML = '<li>Demo mode is active until the Python backend is running.</li>';
   }
 }
 
