@@ -2,7 +2,13 @@ const bookingForm = document.getElementById('bookingForm');
 const bookingResult = document.getElementById('bookingResult');
 const bookingList = document.getElementById('bookingList');
 const apiStatus = document.getElementById('apiStatus');
-const API_BASE = 'http://127.0.0.1:8000';
+const DEFAULT_API_BASE = 'http://127.0.0.1:8000';
+const apiFromQuery = new URLSearchParams(window.location.search).get('api');
+const API_BASE = (apiFromQuery || localStorage.getItem('servicexApiBase') || DEFAULT_API_BASE).replace(/\/$/, '');
+
+if (apiFromQuery) {
+  localStorage.setItem('servicexApiBase', API_BASE);
+}
 
 const pricing = {
   plumber: 400,

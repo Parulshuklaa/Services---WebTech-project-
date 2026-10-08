@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: servicex-api
+    runtime: python
+    plan: free
+    buildCommand: ""
+    startCommand: python3 backend/app.py
+    healthCheckPath: /api/health

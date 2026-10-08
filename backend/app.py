@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import sqlite3
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -253,8 +254,10 @@ class ServiceXHandler(BaseHTTPRequestHandler):
 
 def run() -> None:
     init_db()
-    server = ThreadingHTTPServer(("127.0.0.1", 8000), ServiceXHandler)
-    print("ServiceX API running at http://127.0.0.1:8000")
+    host = os.environ.get("HOST", "0.0.0.0")
+    port = int(os.environ.get("PORT", "8000"))
+    server = ThreadingHTTPServer((host, port), ServiceXHandler)
+    print(f"ServiceX API running at http://{host}:{port}")
     server.serve_forever()
 
 
