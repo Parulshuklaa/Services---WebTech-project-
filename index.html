@@ -54,6 +54,9 @@
         <p>Select a service, enter your location, and see an estimated fare.</p>
       </div>
       <form id="bookingForm">
+        <label for="customerName">Your name</label>
+        <input id="customerName" type="text" placeholder="Enter your name" required />
+
         <label for="service">Service type</label>
         <select id="service" required>
           <option value="plumber">Plumber</option>
@@ -74,11 +77,21 @@
         <button type="submit" class="primary-btn">Get Match</button>
       </form>
       <div id="bookingResult" class="result-card hidden"></div>
+      <div class="dashboard">
+        <div>
+          <h3>Backend API</h3>
+          <p id="apiStatus">Checking backend connection...</p>
+        </div>
+        <div>
+          <h3>Recent Bookings</h3>
+          <ul id="bookingList"></ul>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>Servex Pro • Smart local service marketplace • HTML, CSS, JavaScript</p>
+    <p>Servex Pro • Full stack local service marketplace • HTML, CSS, JavaScript, Python, SQLite</p>
   </footer>
 
   <script src="script.js"></script>
